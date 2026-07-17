@@ -42,18 +42,18 @@ const Page = () => {
       <div ref={resumeRef} id="resume-card" className="w-full max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden" style={{color: '#1f2937'}}>
 
         {/* Header — dark bg so text-white is fine here */}
-        <div style={{background: 'linear-gradient(to right, #9333ea, #3b82f6)'}} className="px-6 py-6">
+        <div style={{background: 'linear-gradient(to right, #9333ea, #3b82f6)', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact'}} className="px-6 py-6">
           <div className="flex items-center gap-4">
             {data.photo && (
-              <img src={data.photo} alt="profile" className="w-16 h-16 rounded-full object-cover border-2 border-white/50" />
+              <img src={data.photo} alt="profile" className="w-16 h-16 rounded-full object-cover" style={{border: '2px solid white'}} />
             )}
             <div>
-              <h2 className="text-2xl font-bold text-white">{data.name || "Your Name"}</h2>
-              <div className="mt-1 flex flex-col gap-1 text-sm text-white/80">
-                {data.email && <span className="text-white/80">✉ {data.email}</span>}
-                {data.phone && <span className="text-white/80">📞 {data.phone}</span>}
-                {data.address && <span className="text-white/80">📍 {data.address}</span>}
-                {data.linkedin && <span className="text-white/80">🔗 {data.linkedin}</span>}
+              <h2 style={{fontSize: '1.6rem', fontWeight: '800', color: 'white', letterSpacing: '0.02em'}}>{data.name || "Your Name"}</h2>
+              <div className="mt-1 flex flex-col gap-1" style={{fontSize: '0.75rem', color: 'rgba(255,255,255,0.9)'}}>
+                {data.email && <span>✉ {data.email}</span>}
+                {data.phone && <span>📞 {data.phone}</span>}
+                {data.address && <span>📍 {data.address}</span>}
+                {data.linkedin && <span>🔗 {data.linkedin}</span>}
               </div>
             </div>
           </div>
