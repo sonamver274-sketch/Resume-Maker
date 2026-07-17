@@ -7,7 +7,7 @@ const page = () => {
   const router = useRouter();
   const id = params.id;
 
-  const [form, setForm] = useState({ name: "", address: "", email: "", phone: "", linkedin: "" });
+  const [form, setForm] = useState({ name: "", address: "", email: "", phone: "", linkedin: "", photo: "" });
 
   useEffect(() => {
     const res = localStorage.getItem("profile");
@@ -17,6 +17,16 @@ const page = () => {
       if (current) setForm(prev => ({ ...prev, ...current }));
     }
   }, [id]);
+
+  function handlePhoto(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      setForm(prev => ({ ...prev, photo: reader.result as string }))
+    }
+    reader.readAsDataURL(file)
+  }
 
   function handleSaveButton() {
     const res = localStorage.getItem("profile");
@@ -60,6 +70,19 @@ const page = () => {
               rows={3}
               className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-purple-400 transition resize-none"
               placeholder="Address"
+            />
+          </div>
+
+          <div>
+            <label className="text-white/70 text-sm mb-1 block">Photo (Optional)</label>
+            {form.photo && (
+              <img src={form.photo} alt="profile" className="w-20 h-20 rounded-full object-cover mb-2 border-2 border-purple-400" />
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handlePhoto}
+              className="w-full text-white/60 text-sm file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-purple-600 file:text-white file:text-sm cursor-pointer"
             />
           </div>
         </div>

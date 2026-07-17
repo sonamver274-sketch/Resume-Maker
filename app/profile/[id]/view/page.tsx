@@ -43,12 +43,19 @@ const Page = () => {
 
         {/* Header — dark bg so text-white is fine here */}
         <div style={{background: 'linear-gradient(to right, #9333ea, #3b82f6)'}} className="px-6 py-6">
-          <h2 className="text-2xl font-bold text-white">{data.name || "Your Name"}</h2>
-          <div className="mt-2 flex flex-col gap-1 text-sm text-white/80">
-            {data.email && <span className="text-white/80">✉ {data.email}</span>}
-            {data.phone && <span className="text-white/80">📞 {data.phone}</span>}
-            {data.address && <span className="text-white/80">📍 {data.address}</span>}
-            {data.linkedin && <span className="text-white/80">🔗 {data.linkedin}</span>}
+          <div className="flex items-center gap-4">
+            {data.photo && (
+              <img src={data.photo} alt="profile" className="w-16 h-16 rounded-full object-cover border-2 border-white/50" />
+            )}
+            <div>
+              <h2 className="text-2xl font-bold text-white">{data.name || "Your Name"}</h2>
+              <div className="mt-1 flex flex-col gap-1 text-sm text-white/80">
+                {data.email && <span className="text-white/80">✉ {data.email}</span>}
+                {data.phone && <span className="text-white/80">📞 {data.phone}</span>}
+                {data.address && <span className="text-white/80">📍 {data.address}</span>}
+                {data.linkedin && <span className="text-white/80">🔗 {data.linkedin}</span>}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -107,6 +114,16 @@ const Page = () => {
               <p className="text-gray-600 text-sm">{data.language}</p>
             </div>
           )}
+
+          {/* Custom Sections */}
+          {data.customSections?.map((name: string) => (
+            data.customContent?.[name] && (
+              <div key={name}>
+                <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">{name}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{data.customContent[name]}</p>
+              </div>
+            )
+          ))}
 
         </div>
       </div>
