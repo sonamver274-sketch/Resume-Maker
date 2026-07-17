@@ -68,21 +68,33 @@ const Page = () => {
             </div>
           )}
 
-          {data.degree && (
+          {data.educations?.length > 0 && (
             <div>
               <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Education</h3>
-              <p className="font-semibold text-gray-800">{data.degree}</p>
-              <p className="text-gray-500 text-sm">{data.college}</p>
-              <p className="text-gray-400 text-xs">{data.year} {data.marks && `| ${data.marks}`}</p>
+              <div className="flex flex-col gap-3">
+                {data.educations.map((edu: any, i: number) => (
+                  <div key={i}>
+                    <p className="font-semibold text-gray-800">{edu.degree}</p>
+                    <p className="text-gray-500 text-sm">{edu.college}</p>
+                    <p className="text-gray-400 text-xs">{edu.year} {edu.marks && `| ${edu.marks}`}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
-          {data.company && (
+          {data.experiences?.length > 0 && (
             <div>
               <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Experience</h3>
-              <p className="font-semibold text-gray-800">{data.role}</p>
-              <p className="text-gray-500 text-sm">{data.company} | {data.duration}</p>
-              {data.description && <p className="text-gray-400 text-xs mt-1">{data.description}</p>}
+              <div className="flex flex-col gap-3">
+                {data.experiences.map((exp: any, i: number) => (
+                  <div key={i}>
+                    <p className="font-semibold text-gray-800">{exp.role}</p>
+                    <p className="text-gray-500 text-sm">{exp.company} | {exp.duration}</p>
+                    {exp.description && <p className="text-gray-400 text-xs mt-1">{exp.description}</p>}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
@@ -99,12 +111,18 @@ const Page = () => {
             </div>
           )}
 
-          {data.projectName && (
+          {data.projects?.length > 0 && (
             <div>
               <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Projects</h3>
-              <p className="font-semibold text-gray-800">{data.projectName}</p>
-              {data.description && <p className="text-gray-500 text-sm">{data.description}</p>}
-              {data.link && <p className="text-blue-500 text-xs mt-1">{data.link}</p>}
+              <div className="flex flex-col gap-3">
+                {data.projects.map((proj: any, i: number) => (
+                  <div key={i}>
+                    <p className="font-semibold text-gray-800">{proj.projectName}</p>
+                    {proj.description && <p className="text-gray-500 text-sm">{proj.description}</p>}
+                    {proj.link && <p className="text-blue-500 text-xs mt-1">{proj.link}</p>}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

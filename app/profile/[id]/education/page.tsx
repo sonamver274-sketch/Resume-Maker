@@ -7,21 +7,25 @@ const page = () => {
   const router = useRouter();
   const id = params.id;
 
-  const [form, setForm] = useState({ degree: "", college: "", year: "", marks: "" });
+  const [educations, setEducations] = useState([{ degree: "", college: "", year: "", marks: "" }]);
 
   useEffect(() => {
     const res = localStorage.getItem("profile");
     if (res) {
       const allProfiles = JSON.parse(res);
       const current = allProfiles.find((p: any) => p.id === id);
-      if (current) setForm(prev => ({ ...prev, ...current }));
+      if (current?.educations) setEducations(current.educations);
     }
   }, [id]);
 
-  function handleSaveButton() {
+  function handleChange(index: number, key: string, value: string) {
+    setEducations(prev => prev.map((item, i) => i === index ? { ...item, [key]: value } : item));
+  }
+
+  function handleSave() {
     const res = localStorage.getItem("profile");
     const allProfiles = res ? JSON.parse(res) : [];
-    const updated = allProfiles.map((p: any) => p.id === id ? { ...p, ...form } : p);
+    const updated = allProfiles.map((p: any) => p.id === id ? { ...p, educations } : p);
     localStorage.setItem("profile", JSON.stringify(updated));
     router.push(`/profile/${id}`);
   }
@@ -32,29 +36,35 @@ const page = () => {
         <button onClick={() => router.back()} className="text-white/60 mb-4 text-sm hover:text-white transition">← Back</button>
         <h1 className="text-2xl font-bold text-white mb-6">🎓 Education</h1>
 
-        <div className="flex flex-col gap-4">
-          {[
-            { label: "Degree", key: "degree" },
-            { label: "College / University", key: "college" },
-            { label: "Year", key: "year" },
-            { label: "Marks / CGPA", key: "marks" },
-          ].map((field) => (
-            <div key={field.key}>
-              <label className="text-white/70 text-sm mb-1 block">{field.label}</label>
-              <input
-                type="text"
-                value={(form as any)[field.key]}
-                onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-purple-400 transition"
-                placeholder={field.label}
-              />
+        <div className="flex flex-col gap-6">
+          {educations.map((edu, index) => (
+            <div key={index} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <span className="text-white/60 text-xs uppercase tracking-widest">Education {index + 1}</span>
+                {educations.length > 1 && (
+                  <button onClick={() => setEducations(prev => prev.filter((_, i) => i !== index))} className="text-red-400 text-xs">✕ Remove</button>
+                )}
+              </div>
+              {[{ label: "Degree", key: "degree" }, { label: "College / University", key: "college" }, { label: "Year", key: "year" }, { label: "Marks / CGPA", key: "marks" }].map((field) => (
+                <div key={field.key}>
+                  <label className="text-white/70 text-sm mb-1 block">{field.label}</label>
+                  <input type="text" value={(edu as any)[field.key]} onChange={(e) => handleChange(index, field.key, e.target.value)}
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-purple-400 transition" placeholder={field.label} />
+                </div>
+              ))}
             </div>
           ))}
         </div>
 
-        <button onClick={handleSaveButton} className="w-full mt-6 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg shadow-xl hover:opacity-90 transition">
-          Save
-        </button>
+        <div className="flex gap-3 mt-6">
+          <button onClick={() => setEducations(prev => [...prev, { degree: "", college: "", year: "", marks: "" }])}
+            className="flex-1 py-4 rounded-2xl bg-white/10 border border-white/20 text-white font-bold hover:bg-white/20 transition">
+            + Add
+          </button>
+          <button onClick={handleSave} className="flex-1 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold shadow-xl hover:opacity-90 transition">
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );
