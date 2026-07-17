@@ -42,7 +42,7 @@ const Page = () => {
       <div ref={resumeRef} id="resume-card" className="w-full max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden" style={{color: '#1f2937'}}>
 
         {/* Header — dark bg so text-white is fine here */}
-        <div style={{background: 'linear-gradient(to right, #9333ea, #3b82f6)', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact'}} className="px-6 py-6">
+        <div style={{background: 'linear-gradient(to right, #1f2937, #374151)', WebkitPrintColorAdjust: 'exact', printColorAdjust: 'exact'}} className="px-6 py-6">
           <div className="flex items-center gap-4">
             {data.photo && (
               <img src={data.photo} alt="profile" className="w-16 h-16 rounded-full object-cover" style={{border: '2px solid white'}} />
@@ -63,14 +63,14 @@ const Page = () => {
 
           {data.objective && (
             <div>
-              <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Objective</h3>
+              <h3 className="font-bold text-sm uppercase tracking-widest border-b pb-1 mb-2" style={{color: '#374151', borderColor: '#e5e7eb'}}>Objective</h3>
               <p className="text-gray-600 text-sm leading-relaxed">{data.objective}</p>
             </div>
           )}
 
           {data.educations?.length > 0 && (
             <div>
-              <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Education</h3>
+              <h3 className="font-bold text-sm uppercase tracking-widest border-b pb-1 mb-2" style={{color: '#374151', borderColor: '#e5e7eb'}}>Education</h3>
               <div className="flex flex-col gap-3">
                 {data.educations.map((edu: any, i: number) => (
                   <div key={i}>
@@ -85,7 +85,7 @@ const Page = () => {
 
           {data.experiences?.length > 0 && (
             <div>
-              <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Experience</h3>
+              <h3 className="font-bold text-sm uppercase tracking-widest border-b pb-1 mb-2" style={{color: '#374151', borderColor: '#e5e7eb'}}>Experience</h3>
               <div className="flex flex-col gap-3">
                 {data.experiences.map((exp: any, i: number) => (
                   <div key={i}>
@@ -100,10 +100,10 @@ const Page = () => {
 
           {data.skills && (
             <div>
-              <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Skills</h3>
+              <h3 className="font-bold text-sm uppercase tracking-widest border-b pb-1 mb-2" style={{color: '#374151', borderColor: '#e5e7eb'}}>Skills</h3>
               <div className="flex flex-wrap gap-2">
                 {data.skills.split(',').map((skill: string, i: number) => (
-                  <span key={i} className="bg-purple-100 text-purple-700 text-xs px-3 py-1 rounded-full font-medium">
+                  <span key={i} className="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">
                     {skill.trim()}
                   </span>
                 ))}
@@ -113,7 +113,7 @@ const Page = () => {
 
           {data.projects?.length > 0 && (
             <div>
-              <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Projects</h3>
+              <h3 className="font-bold text-sm uppercase tracking-widest border-b pb-1 mb-2" style={{color: '#374151', borderColor: '#e5e7eb'}}>Projects</h3>
               <div className="flex flex-col gap-3">
                 {data.projects.map((proj: any, i: number) => (
                   <div key={i}>
@@ -128,7 +128,7 @@ const Page = () => {
 
           {data.language && (
             <div>
-              <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">Languages</h3>
+              <h3 className="font-bold text-sm uppercase tracking-widest border-b pb-1 mb-2" style={{color: '#374151', borderColor: '#e5e7eb'}}>Languages</h3>
               <p className="text-gray-600 text-sm">{data.language}</p>
             </div>
           )}
@@ -137,7 +137,7 @@ const Page = () => {
           {data.customSections?.map((name: string) => (
             data.customContent?.[name] && (
               <div key={name}>
-                <h3 className="text-purple-600 font-bold text-sm uppercase tracking-widest border-b border-purple-200 pb-1 mb-2">{name}</h3>
+                <h3 className="font-bold text-sm uppercase tracking-widest border-b pb-1 mb-2" style={{color: '#374151', borderColor: '#e5e7eb'}}>{name}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{data.customContent[name]}</p>
               </div>
             )
