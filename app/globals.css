@@ -8,12 +8,22 @@ body {
 }
 
 @media print {
-  body * { visibility: hidden; }
-  #resume-card, #resume-card * { visibility: visible; }
+  @page { margin: 15mm; size: A4; }
+
+  body { background: white !important; margin: 0 !important; padding: 0 !important; min-height: auto !important; }
+
+  body > * { display: none !important; }
+
   #resume-card {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    overflow: visible !important;
   }
+
+  #resume-card * { visibility: visible !important; color: inherit !important; }
 }
