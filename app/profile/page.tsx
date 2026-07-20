@@ -39,7 +39,7 @@ const page = () => {
             <div key={p.id} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-lg">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-purple-500/50 flex items-center justify-center text-white font-bold">
-                  {index + 1}
+                   {index + 1}
                 </div>
                 <div>
                   <h2 className="text-white font-semibold">{p.name}</h2>
